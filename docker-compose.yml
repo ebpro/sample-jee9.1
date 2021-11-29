@@ -1,0 +1,37 @@
+version: '3'
+services:
+  jakartaEE:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: brunoe/samplejee91restapp
+    environment:
+      - ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+      - "8181:8181"
+      - "4848:4848"
+      - "8686:8686"
+    depends_on:
+      - db
+  db:
+    image: oscarfonts/h2:1.4.199
+    ports:
+      - "1521:1521"
+      - "8081:81"
+    environment:
+      H2_OPTIONS: '-ifNotExists'
+    volumes:
+      - h2data:/opt/h2-data
+#  db:
+#    image: brunoe/h2
+#    ports:
+#      - "8081:8082"
+#      - "1521:8092"
+#    environment:
+#        H2_OPTIONS: '-ifNotExists -webAllowOthers -tcpAllowOthers -pgAllowOthers -ifNotExists'
+#    volumes:
+#      - h2data:/h2-data
+
+volumes:
+  h2data:

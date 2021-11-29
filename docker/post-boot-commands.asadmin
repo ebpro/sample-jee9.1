@@ -1,0 +1,9 @@
+set-hazelcast-configuration --enabled=true --dynamic=true
+
+add-library  /tmp/h2.jar
+# create-jdbc-connection-pool --datasourceclassname org.h2.jdbcx.JdbcDataSource --restype javax.sql.ConnectionPoolDataSource --property password=password:user=user:url="jdbc:h2:tcp://db:1521/payara;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH" H2-pool
+create-jdbc-connection-pool --datasourceclassname org.h2.jdbcx.JdbcDataSource --restype javax.sql.ConnectionPoolDataSource --property password=password:user=user:url="jdbc:h2:tcp://db:1521/payara" H2-pool
+create-jdbc-resource --connectionpoolid H2-pool jdbc/h2-pool
+
+
+# set configs.config.server-config.network-config.protocols.protocol.http-listener-2.ssl.cert-nickname=mycert
