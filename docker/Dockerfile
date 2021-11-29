@@ -30,7 +30,7 @@ RUN keytool -importkeystore -noprompt -destkeystore /opt/payara/appserver/glassf
     keytool -importcert -noprompt -trustcacerts -destkeystore /opt/payara/appserver/glassfish/domains/domain1/config/cacerts.jks -file /tmp/mycert.crt -alias mycert -srcstorepass storepass -deststorepass ${STORE_PASSWORD} -deststoretype pkcs12
 
 # COPY target/*.war $DEPLOY_DIR
-COPY --from=build /app/restApp/target/*.war \
-                  $DEPLOY_DIR
-COPY --from=build /app/wsApp/target/*.war \
-                  $DEPLOY_DIR
+#COPY --from=build /app/restApp/target/*.war \
+#                  $DEPLOY_DIR
+#COPY --from=build /app/wsApp/target/*.war \
+#                  $DEPLOY_DIR

@@ -1,9 +1,11 @@
 package fr.univtln.bruno.samples.jee91.rs;
 
 
+import fr.univtln.bruno.samples.jee91.dao.DAO1;
+import fr.univtln.bruno.samples.jee91.dao.DAO2;
+import fr.univtln.bruno.samples.jee91.dao.Person;
 import fr.univtln.bruno.samples.jee91.ejb.Hello;
 import fr.univtln.bruno.samples.jee91.ejb.qualifiers.SpokenLanguage;
-import fr.univtln.bruno.samples.jee91.dao.DAO1;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -12,6 +14,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import java.util.List;
 import java.util.Map;
 
 @Path("sample")
@@ -23,6 +26,9 @@ public class SampleResource {
 
     @Inject
     DAO1 dao1;
+
+    @Inject
+    DAO2 dao2;
 
     @Inject
     @ConfigProperty(name = "message")
@@ -49,7 +55,7 @@ public class SampleResource {
     @GET
     @Path("dao2")
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> dao2() {
-        return dao1.getMetadata();
+    public List<Person> dao2() {
+        return dao2.findAll();
     }
 }
