@@ -3,9 +3,6 @@ package fr.univtln.bruno.samples.jee91.wsclient;
 import jakarta.websocket.*;
 import lombok.extern.slf4j.Slf4j;
 import org.glassfish.grizzly.ssl.SSLContextConfigurator;
-import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
-import org.glassfish.tyrus.client.ClientManager;
-import org.glassfish.tyrus.client.ClientProperties;
 
 import java.net.URI;
 import java.net.URISyntaxException;

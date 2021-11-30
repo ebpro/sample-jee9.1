@@ -7,7 +7,7 @@ import jakarta.persistence.PersistenceUnit;
 
 import java.util.Map;
 
-public class DAO1 {
+public class MainDAO {
 
     @PersistenceUnit(unitName="myappPU")
     EntityManagerFactory entityManagerFactory;

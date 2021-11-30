@@ -1,4 +1,4 @@
-package fr.univtln.bruno.samples.jee91.dao;
+package fr.univtln.bruno.samples.jee91.dao.entitymanagersproducers;
 
 import jakarta.enterprise.inject.Produces;
 import jakarta.persistence.EntityManager;

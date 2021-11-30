@@ -8,7 +8,7 @@ RUN --mount=type=cache,id=mvncache,target=/root/.m2/repository,rw \
 	mvn -B clean package
 
 ### Then we add the builded war to a JEE server.
-FROM payara/server-full:5.2021.9-jdk11
+FROM payara/server-full:5.2021.9-jdk11 as server
 ARG STORE_PASSWORD=changeit
 ## Download the JDBC driver
 USER root
@@ -29,7 +29,7 @@ COPY --from=build /app/utils/src/main/resources/mycert-pub.p12  /app/utils/src/m
 RUN keytool -importkeystore -noprompt -destkeystore /opt/payara/appserver/glassfish/domains/domain1/config/keystore.jks -srckeystore /tmp/mycert.p12 -srcstoretype PKCS12 -alias mycert -srcstorepass storepass -deststorepass ${STORE_PASSWORD} -deststoretype pkcs12 && \
     keytool -importcert -noprompt -trustcacerts -destkeystore /opt/payara/appserver/glassfish/domains/domain1/config/cacerts.jks -file /tmp/mycert.crt -alias mycert -srcstorepass storepass -deststorepass ${STORE_PASSWORD} -deststoretype pkcs12
 
-# COPY target/*.war $DEPLOY_DIR
+FROM server as production
 COPY --from=build /app/restApp/target/*.war \
                   $DEPLOY_DIR
 COPY --from=build /app/wsApp/target/*.war \
