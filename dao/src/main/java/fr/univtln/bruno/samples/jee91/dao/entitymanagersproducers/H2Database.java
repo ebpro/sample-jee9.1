@@ -1,4 +1,4 @@
-package fr.univtln.bruno.samples.jee91.dao;
+package fr.univtln.bruno.samples.jee91.dao.entitymanagersproducers;
 
 import jakarta.inject.Qualifier;
 
@@ -11,5 +11,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD,
         ElementType.TYPE, ElementType.PARAMETER})
-public @interface PostgreSQLDatabase {
+public @interface H2Database {
 }

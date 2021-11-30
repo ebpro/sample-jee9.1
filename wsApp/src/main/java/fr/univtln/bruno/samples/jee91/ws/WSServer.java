@@ -1,6 +1,6 @@
 package fr.univtln.bruno.samples.jee91.ws;
 
-import fr.univtln.bruno.samples.jee91.dao.DAO1;
+import fr.univtln.bruno.samples.jee91.dao.MainDAO;
 import fr.univtln.bruno.samples.jee91.ejb.Hello;
 import fr.univtln.bruno.samples.jee91.ejb.qualifiers.SpokenLanguage;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -25,7 +25,7 @@ public class WSServer {
     Hello hello;
 
     @Inject
-    DAO1 dao1;
+    MainDAO dao1;
 
     @OnOpen
     public void onOpen(Session session) throws EncodeException, IOException {

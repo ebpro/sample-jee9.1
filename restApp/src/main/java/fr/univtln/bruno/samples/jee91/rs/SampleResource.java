@@ -1,23 +1,25 @@
 package fr.univtln.bruno.samples.jee91.rs;
 
 
-import fr.univtln.bruno.samples.jee91.dao.DAO1;
-import fr.univtln.bruno.samples.jee91.dao.DAO2;
+import fr.univtln.bruno.samples.jee91.dao.MainDAO;
 import fr.univtln.bruno.samples.jee91.dao.Person;
+import fr.univtln.bruno.samples.jee91.dao.PersonDAO;
 import fr.univtln.bruno.samples.jee91.ejb.Hello;
 import fr.univtln.bruno.samples.jee91.ejb.qualifiers.SpokenLanguage;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Path("sample")
+//@Stateless
+@Produces({MediaType.APPLICATION_JSON,MediaType.TEXT_XML})
 public class SampleResource {
 
     @Inject
@@ -25,10 +27,10 @@ public class SampleResource {
     Hello hello;
 
     @Inject
-    DAO1 dao1;
+    MainDAO mainDAO;
 
     @Inject
-    DAO2 dao2;
+    PersonDAO personDAO;
 
     @Inject
     @ConfigProperty(name = "message")
@@ -46,16 +48,29 @@ public class SampleResource {
     }
 
     @GET
-    @Path("dao1")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Object> dao1() {
-        return dao1.getMetadata();
+    @Path("main")
+    public Map<String, Object> mainGetMetadata() {
+        return mainDAO.getMetadata();
     }
 
     @GET
-    @Path("dao2")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Person> dao2() {
-        return dao2.findAll();
+    @Path("persons")
+    public List<Person> personsFindAll() {
+        return personDAO.findAll();
     }
+
+    @GET
+    @Path("persons/{uuid}")
+    public Person personsFind(@PathParam("uuid") UUID uuid) {
+        return personDAO.findByUUID(uuid);
+    }
+
+    @Transactional
+    @POST
+    @Path("persons")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public UUID personsPersist(Person person) {
+        return personDAO.persist(person);
+    }
+
 }
