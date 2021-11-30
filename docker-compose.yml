@@ -23,6 +23,13 @@ services:
         H2_OPTIONS: '-ifNotExists -webAllowOthers -tcpAllowOthers -pgAllowOthers -ifNotExists'
     volumes:
       - h2data:/h2-data
-
+  reverse-proxy:
+    environment:
+      - NGINX_HOST=localhost
+    build: docker/nginx
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8888:443"
 volumes:
   h2data:

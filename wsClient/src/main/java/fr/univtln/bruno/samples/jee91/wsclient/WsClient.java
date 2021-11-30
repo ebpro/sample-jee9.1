@@ -23,7 +23,7 @@ public class WsClient {
 
             String pathtoCert = getClass().getClassLoader().getResource("mycert-pub.jks").toURI().getPath();
 
-            System.getProperties().put("javax.net.debug", "all");
+            System.getProperties().put("javax.net.debug", "ssl");
             System.getProperties().put(SSLContextConfigurator.KEY_STORE_FILE, pathtoCert);
             System.getProperties().put(SSLContextConfigurator.KEY_STORE_TYPE, "JKS");
             System.getProperties().put(SSLContextConfigurator.TRUST_STORE_FILE, pathtoCert);
@@ -42,7 +42,7 @@ public class WsClient {
     public static void main(String[] args) {
         try {
 
-            final WsClient clientEndPoint = new WsClient(new URI("ws://localhost:8080/wsApp-1.0-SNAPSHOT/hellows"));
+            final WsClient clientEndPoint = new WsClient(new URI("wss://localhost:8686/wsApp-1.0-SNAPSHOT/hellows"));
             clientEndPoint.sendMessage("Hello 1 !");
             Thread.sleep(5000);
             clientEndPoint.sendMessage("Hello 2 !");
