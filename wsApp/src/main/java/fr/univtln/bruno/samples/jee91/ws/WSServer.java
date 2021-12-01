@@ -20,9 +20,10 @@ import java.io.IOException;
 @Log
 public class WSServer {
 
-   @Inject
+    @Inject
     @SpokenLanguage(SpokenLanguage.Language.ENGLISH)
     Hello hello;
+
 
     @Inject
     MainDAO dao1;
@@ -36,8 +37,8 @@ public class WSServer {
     }
 
     @OnMessage
-    public void onMessage(Session session,
-                          String message) throws IOException {
+    public void onMessage(String message, Session session
+    ) throws IOException {
         session.getBasicRemote().sendText("Echo :" + message);
     }
 }

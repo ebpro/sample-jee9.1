@@ -40,10 +40,13 @@ curl --cacert localhost.pem  \
 Avec un reverse proxy :
 ```
 echo quit | openssl s_client -showcerts \
-            -servername localhost -connect localhost:8888 >! nginx.pem
+            -servername localhost -connect localhost:8888 >! localhost.pem
 
 curl --cacert localhost.pem  \
       https://localhost:8181/restApp-1.0-SNAPSHOT/resources/sample/persons/843c8236-6c6b-450e-9aa3-211a9b897403
+      
+keytool -noprompt -storepass storepass -import \
+        -trustcacerts -alias mycert -file localhost.pem -keystore mycert-pub.jks      
 ```
 
 
