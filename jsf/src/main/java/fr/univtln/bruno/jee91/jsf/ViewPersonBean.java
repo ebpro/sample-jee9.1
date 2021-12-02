@@ -10,7 +10,7 @@ import java.util.List;
 
 @Named
 @RequestScoped
-public class SampleBean {
+public class ViewPersonBean {
 
     @Inject
     PersonDAO personDAO;
@@ -24,4 +24,5 @@ public class SampleBean {
     public List<Person> getPersons() {
         return personDAO.findAll();
     }
+
 }
