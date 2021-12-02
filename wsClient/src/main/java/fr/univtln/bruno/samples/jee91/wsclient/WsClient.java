@@ -12,7 +12,6 @@ import java.util.Map;
 @ClientEndpoint
 @Slf4j
 public class WsClient {
-
     Session userSession = null;
     private MessageHandler messageHandler;
     private Map<String, Object> properties;
@@ -23,7 +22,7 @@ public class WsClient {
 
             String pathtoCert = getClass().getClassLoader().getResource("mycert-pub.jks").toURI().getPath();
 
-            System.getProperties().put("javax.net.debug", "all");
+            System.getProperties().put("javax.net.debug", "ssl");
             System.getProperties().put(SSLContextConfigurator.KEY_STORE_FILE, pathtoCert);
             System.getProperties().put(SSLContextConfigurator.KEY_STORE_TYPE, "JKS");
             System.getProperties().put(SSLContextConfigurator.TRUST_STORE_FILE, pathtoCert);

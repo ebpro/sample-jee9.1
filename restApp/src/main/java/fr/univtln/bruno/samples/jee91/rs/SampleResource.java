@@ -6,19 +6,19 @@ import fr.univtln.bruno.samples.jee91.dao.Person;
 import fr.univtln.bruno.samples.jee91.dao.PersonDAO;
 import fr.univtln.bruno.samples.jee91.ejb.Hello;
 import fr.univtln.bruno.samples.jee91.ejb.qualifiers.SpokenLanguage;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@RequestScoped
 @Path("sample")
-//@Stateless
 @Produces({MediaType.APPLICATION_JSON,MediaType.TEXT_XML})
 public class SampleResource {
 
@@ -32,9 +32,7 @@ public class SampleResource {
     @Inject
     PersonDAO personDAO;
 
-    @Inject
-    @ConfigProperty(name = "message")
-    private String message;
+    private String message = "Hello";
 
     @GET
     public Response message() {

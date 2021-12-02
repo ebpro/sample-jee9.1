@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<h:head>
+    <title>Hello World JSF 3</title>
+</h:head>
+
+<h:body>
+    <h3 style="text-align: center">#{sampleBean.message}</h3>
+
+    <h:dataTable value="#{sampleBean.persons}" var="person"
+                 styleClass="order-table"
+                 headerClass="order-table-header"
+                 rowClasses="order-table-odd-row,order-table-even-row">
+        <h:column>
+            <f:facet name="header">UUID</f:facet>
+            #{person.uuid}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            #{person.name}
+        </h:column>
+    </h:dataTable>
+
+    <h:form>
+        <div class="card">
+            <p:dataTable var="person" value="#{sampleBean.persons}">
+                <p:column headerText="UUID">
+                    <h:outputText value="#{person.uuid}" />
+                </p:column>
+
+                <p:column headerText="Name">
+                    <h:outputText value="#{person.name}" />
+                </p:column>
+            </p:dataTable>
+        </div>
+    </h:form>
+
+</h:body>
+</html>
