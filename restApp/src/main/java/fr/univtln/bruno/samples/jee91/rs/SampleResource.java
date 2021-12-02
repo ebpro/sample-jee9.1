@@ -32,7 +32,7 @@ public class SampleResource {
     @Inject
     PersonDAO personDAO;
 
-    private String message = "Hello";
+    private final String message = "Hello";
 
     @GET
     public Response message() {

@@ -19,18 +19,18 @@ public class WsClient {
     public WsClient(URI endpointURI) {
         try {
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-
-            String pathtoCert = getClass().getClassLoader().getResource("mycert-pub.jks").toURI().getPath();
-
+            var url = getClass().getClassLoader().getResource("mycert-pub.jks");
             System.getProperties().put("javax.net.debug", "ssl");
-            System.getProperties().put(SSLContextConfigurator.KEY_STORE_FILE, pathtoCert);
-            System.getProperties().put(SSLContextConfigurator.KEY_STORE_TYPE, "JKS");
-            System.getProperties().put(SSLContextConfigurator.TRUST_STORE_FILE, pathtoCert);
-            System.getProperties().put(SSLContextConfigurator.TRUST_STORE_TYPE, "JKS");
-            System.getProperties().put(SSLContextConfigurator.KEY_STORE_PASSWORD, "storepass");
-            System.getProperties().put(SSLContextConfigurator.TRUST_STORE_PASSWORD, "storepass");
+            if (url != null) {
+                String pathtoCert = url.toURI().getPath();
+                System.getProperties().put(SSLContextConfigurator.KEY_STORE_FILE, pathtoCert);
+                System.getProperties().put(SSLContextConfigurator.KEY_STORE_TYPE, "JKS");
+                System.getProperties().put(SSLContextConfigurator.TRUST_STORE_FILE, pathtoCert);
+                System.getProperties().put(SSLContextConfigurator.TRUST_STORE_TYPE, "JKS");
+                System.getProperties().put(SSLContextConfigurator.KEY_STORE_PASSWORD, "storepass");
+                System.getProperties().put(SSLContextConfigurator.TRUST_STORE_PASSWORD, "storepass");
+            }
             final SSLContextConfigurator defaultConfig = new SSLContextConfigurator();
-
             defaultConfig.retrieve(System.getProperties());
             container.connectToServer(this, endpointURI);
         } catch (Exception e) {

@@ -22,14 +22,14 @@ public class AddPersonView implements Serializable {
     private transient PersonDAO personDAO;
 
     @Getter
-    private Person newPerson = new Person();
+    private final Person newPerson = new Person();
     @Getter
     private Person addedPerson = new Person();
 
     @Transactional
     public void addPerson() {
-        FacesMessage facesMessage;
-        personDAO.persist(addedPerson = Person.builder().name(newPerson.getName()).build());
+        addedPerson = Person.builder().name(newPerson.getName()).build();
+        personDAO.persist(addedPerson);
         FacesContext.getCurrentInstance().addMessage("growl-id", new FacesMessage(FacesMessage.SEVERITY_INFO, "Person added", addedPerson.getName() + "(" + addedPerson.getUuid() + ")"));
     }
 }
