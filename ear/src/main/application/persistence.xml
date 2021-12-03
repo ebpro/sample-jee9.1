@@ -5,6 +5,7 @@
     version="3.0">
     <persistence-unit name="myappPU" transaction-type="JTA">
         <jta-data-source>jdbc/my-h2-pool</jta-data-source>
+        <jar-file>lib/fr.univtln.bruno.samples.jee91-entites-1.0-SNAPSHOT.jar</jar-file>
         <class>fr.univtln.bruno.samples.jee91.dao.Person</class>
 
         <properties>

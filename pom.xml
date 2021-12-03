@@ -8,14 +8,19 @@
 
 
     <modules>
+        <module>utils</module>
+
+        <module>entites</module>
+        <module>dao</module>
+
         <module>business</module>
         <module>restApp</module>
-        <module>wsApp</module>
-        <module>dao</module>
-        <module>wsClient</module>
-        <module>entites</module>
-        <module>utils</module>
+        <module>websocketApp</module>
         <module>jsf</module>
+        <module>ear</module>
+
+        <module>websocketClient</module>
+
     </modules>
     <packaging>pom</packaging>
 

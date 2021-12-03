@@ -67,6 +67,13 @@
             <artifactId>all-themes</artifactId>
             <version>${all-themes.version}</version>
         </dependency-->
+
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.faces</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>

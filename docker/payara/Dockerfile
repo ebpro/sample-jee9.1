@@ -8,12 +8,14 @@ FROM eclipse-temurin:11-jdk
 # 8181: https
 EXPOSE 4848 9009 8080 8181
 
-# Payara version (5.183+)
 #ARG PAYARA_VERSION=5.2021.9
-ARG PAYARA_VERSION=6.2021.1.Alpha1
-ARG PAYARA_PKG=https://search.maven.org/remotecontent?filepath=fish/payara/distributions/payara/${PAYARA_VERSION}/payara-${PAYARA_VERSION}.zip
 #ARG PAYARA_SHA1=81c43f3c537ec74a813b48172758866615e1e792
+
+ARG PAYARA_VERSION=6.2021.1.Alpha1
 ARG PAYARA_SHA1=0262f8af7e52b318109ed43f8a31a1e93f111bbf
+
+ARG PAYARA_PKG=https://search.maven.org/remotecontent?filepath=fish/payara/distributions/payara/${PAYARA_VERSION}/payara-${PAYARA_VERSION}.zip
+
 
 ARG TINI_VERSION=v0.19.0
 

@@ -9,8 +9,8 @@ RUN --mount=type=cache,id=mvncache,target=/root/.m2/repository,rw \
 
 
 ### Then we add the builded war to a JEE server.
-#FROM payara/server-full:5.2021.9-jdk11 as server
-FROM brunoe/payara:jdk11-6 as server
+FROM payara/server-full:5.2021.9-jdk11 as server
+#FROM brunoe/payara:jdk11-6 as server
 
 ARG STORE_PASSWORD=changeit
 ## Download the JDBC driver
@@ -43,5 +43,7 @@ FROM server as production
 #                  $DEPLOY_DIR
 #COPY --from=build /app/wsApp/target/*.war \
 #                  $DEPLOY_DIR
-COPY --from=build /app/jsf/target/*.war \
+#COPY --from=build /app/jsf/target/*.war \
+#                  $DEPLOY_DIR
+COPY --from=build /app/ear/target/*.ear \
                   $DEPLOY_DIR
