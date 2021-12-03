@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en">
+
+<h:head>
+    <title>Person list</title>
+</h:head>
+
+<h:body>
+    <h3 style="text-align: center"><h:outputText value="#{viewPersonBean.message}"/></h3>
+
+    <div class="card">
+        <p:dataTable var="person" value="#{viewPersonBean.persons}">
+            <p:column headerText="UUID">
+                <h:outputText value="#{person.uuid}"/>
+            </p:column>
+
+            <p:column headerText="Name">
+                <h:outputText value="#{person.name}"/>
+            </p:column>
+        </p:dataTable>
+    </div>
+
+</h:body>
+</html>

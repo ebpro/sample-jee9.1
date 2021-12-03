@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class PersonDAO {
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Inject
     public PersonDAO(@H2Database EntityManager entityManager) {
@@ -16,7 +16,7 @@ public class PersonDAO {
     }
 
     public List<Person> findAll() {
-        return entityManager.createNamedQuery("Person.findAll").getResultList();
+        return entityManager.createNamedQuery("Person.findAll", Person.class).getResultList();
     }
 
     public UUID persist(Person person) {
@@ -25,7 +25,7 @@ public class PersonDAO {
     }
 
     public Person findByUUID(UUID uuid) {
-        return entityManager.createNamedQuery("Person.findByUUID", Person.class).setParameter("uuid",uuid).getSingleResult();
+        return entityManager.createNamedQuery("Person.findByUUID", Person.class).setParameter("uuid", uuid).getSingleResult();
     }
 
 }
