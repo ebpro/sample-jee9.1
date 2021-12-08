@@ -51,6 +51,14 @@
             <artifactId>junit-jupiter</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/jakarta.faces/jakarta.faces-api -->
+        <dependency>
+            <groupId>jakarta.faces</groupId>
+            <artifactId>jakarta.faces-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!--dependency>
             <groupId>org.omnifaces</groupId>
             <artifactId>omnifaces</artifactId>

@@ -39,9 +39,9 @@ RUN keytool -importkeystore -noprompt -destkeystore /opt/payara/appserver/glassf
 #RUN wget https://github.com/eclipse-ee4j/mojarra/releases/download/2.3.17-RELEASE/jakarta.faces-2.3.17.jar \
 #    -O /opt/payara/appserver/glassfish/modules/jakarta.faces.jar
 FROM server as production
-#COPY --from=build /app/restApp/target/*.war \
+#COPY --from=build /app/jee/restApp/target/*.war \
 #                  $DEPLOY_DIR
-#COPY --from=build /app/wsApp/target/*.war \
+#COPY --from=build /app/jee/wsApp/target/*.war \
 #                  $DEPLOY_DIR
-COPY --from=build /app/jsf/target/*.war \
+COPY --from=build /app/jee/jsf/target/*.war \
                   $DEPLOY_DIR
