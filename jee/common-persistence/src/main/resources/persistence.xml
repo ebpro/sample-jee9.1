@@ -5,9 +5,8 @@
     version="3.0">
     <persistence-unit name="myappPU" transaction-type="JTA">
         <jta-data-source>jdbc/my-h2-pool</jta-data-source>
-        <jar-file>lib/fr.univtln.bruno.samples.jee91-entites-1.0-SNAPSHOT.jar</jar-file>
         <class>fr.univtln.bruno.samples.jee91.dao.Person</class>
-
+        <validation-mode>CALLBACK</validation-mode>
         <properties>
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create" />
             <property name="jakarta.persistence.schema-generation.scripts.action" value="drop-and-create" />

@@ -46,6 +46,14 @@
             <artifactId>dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>fr.univtln.bruno.samples.jee91</groupId>
+            <artifactId>common-persistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -56,6 +64,7 @@
                 <artifactId>maven-ear-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
+                    <version>8</version>
                     <displayName>Person manager</displayName>
                     <!-- If I want maven to generate the application.xml, set this to true -->
                     <generateApplicationXml>true</generateApplicationXml>
@@ -65,26 +74,28 @@
                         <webModule>
                             <groupId>fr.univtln.bruno.samples.jee91</groupId>
                             <artifactId>restApp</artifactId>
-                            <bundleFileName>restApp.war</bundleFileName>
-                            <contextRoot>/rest</contextRoot>
+                            <!--bundleFileName>restApp.war</bundleFileName-->
                         </webModule>
                         <webModule>
                             <groupId>fr.univtln.bruno.samples.jee91</groupId>
                             <artifactId>jsf</artifactId>
-                            <bundleFileName>jsf.war</bundleFileName>
-                            <contextRoot>/jsf</contextRoot>
+                            <!--bundleFileName>jsf.war</bundleFileName-->
                         </webModule>
                         <webModule>
                             <groupId>fr.univtln.bruno.samples.jee91</groupId>
                             <artifactId>wsApp</artifactId>
-                            <bundleFileName>wsApp.war</bundleFileName>
-                            <contextRoot>/ws</contextRoot>
+                            <!--bundleFileName>wsApp.war</bundleFileName-->
                         </webModule>
                         <ejbModule>
                             <groupId>fr.univtln.bruno.samples.jee91</groupId>
                             <artifactId>business</artifactId>
-                            <bundleFileName>business.jar</bundleFileName>
+                            <!--bundleFileName>business.jar</bundleFileName-->
                         </ejbModule>
+                        <jarModule>
+                            <groupId>fr.univtln.bruno.samples.jee91</groupId>
+                            <artifactId>common-persistence</artifactId>
+                            <bundleDir>lib</bundleDir>
+                        </jarModule>
                     </modules>
                 </configuration>
             </plugin>

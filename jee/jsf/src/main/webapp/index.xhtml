@@ -13,7 +13,7 @@
     <h3 style="text-align: center"><h:outputText value="#{viewPersonBean.message}"/></h3>
 
     <div class="card">
-        <p:dataTable var="person" value="#{viewPersonBean.persons}">
+        <p:dataTable var="person" value="#{viewPersonBean.persons}" lazy="true">
             <p:column headerText="UUID">
                 <h:outputText value="#{person.uuid}"/>
             </p:column>

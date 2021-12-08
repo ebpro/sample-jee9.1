@@ -8,23 +8,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>restApp</artifactId>
-    <packaging>war</packaging>
+    <artifactId>business</artifactId>
+    <packaging>ejb</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>fr.univtln.bruno.samples.jee91</groupId>
-            <artifactId>business</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <!--type>ejb-client</type-->
-        </dependency>
-
-        <dependency>
-            <groupId>fr.univtln.bruno.samples.jee91</groupId>
-            <artifactId>dao</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
@@ -33,15 +20,19 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
         </dependency>
-
     </dependencies>
+
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <ejbVersion>3.1</ejbVersion>
+                    <generateClient>true</generateClient>
+                </configuration>
             </plugin>
         </plugins>
     </build>

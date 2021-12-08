@@ -1,16 +1,17 @@
 # syntax=docker/dockerfile:1.3
 
 ### First we build the application in docker in a controlled env
-FROM maven:3.8.3-eclipse-temurin-11 as build
+FROM maven:3.8.4-eclipse-temurin-11 as build
 WORKDIR /app
-COPY ./ /app/
-RUN --mount=type=cache,id=mvncache,target=/root/.m2/repository,rw \
-	mvn -B clean package
+# COPY pom.xml /app/pom.xml
+COPY . /app/
 
+RUN --mount=type=cache,id=mvncache,target=/root/.m2/repository,rw \
+	mvn -B package
 
 ### Then we add the builded war to a JEE server.
-FROM payara/server-full:5.2021.9-jdk11 as server
-#FROM brunoe/payara:jdk11-6 as server
+#FROM payara/server-full:5.2021.9-jdk11 as server
+FROM brunoe/payara:jdk11-6 as server
 
 ARG STORE_PASSWORD=changeit
 ## Download the JDBC driver
@@ -39,11 +40,11 @@ RUN keytool -importkeystore -noprompt -destkeystore /opt/payara/appserver/glassf
 #RUN wget https://github.com/eclipse-ee4j/mojarra/releases/download/2.3.17-RELEASE/jakarta.faces-2.3.17.jar \
 #    -O /opt/payara/appserver/glassfish/modules/jakarta.faces.jar
 FROM server as production
-#COPY --from=build /app/restApp/target/*.war \
+#COPY --from=build /app/jee/restApp/target/*.war \
 #                  $DEPLOY_DIR
-#COPY --from=build /app/wsApp/target/*.war \
+#COPY --from=build /app/jee/wsApp/target/*.war \
 #                  $DEPLOY_DIR
-#COPY --from=build /app/jsf/target/*.war \
+#COPY --from=build /app/jee/jsf/target/*.war \
 #                  $DEPLOY_DIR
-COPY --from=build /app/ear/target/*.ear \
+COPY --from=build /app/jee/ear/target/*.ear \
                   $DEPLOY_DIR
