@@ -13,25 +13,15 @@
 
     <properties>
         <primefaces.version>11.0.0-RC2</primefaces.version>
-        <!--primefaces.version>11.0.0-SNAPSHOT</primefaces.version-->
-        <omnifaces.version>4.0-M12</omnifaces.version>
         <all-themes.version>1.0.10</all-themes.version>
     </properties>
-
-    <!--repositories>
-        <repository>
-            <id>prime-repo</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>https://repository.primefaces.org</url>
-            <layout>default</layout>
-        </repository>
-    </repositories-->
 
     <dependencies>
         <dependency>
             <groupId>fr.univtln.bruno.samples.jee91</groupId>
             <artifactId>business</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <type>ejb</type>
             <!--type>ejb-client</type-->
         </dependency>
 
@@ -42,39 +32,17 @@
         </dependency>
 
         <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/jakarta.faces/jakarta.faces-api -->
-        <dependency>
-            <groupId>jakarta.faces</groupId>
-            <artifactId>jakarta.faces-api</artifactId>
-            <version>3.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!--dependency>
-            <groupId>org.omnifaces</groupId>
-            <artifactId>omnifaces</artifactId>
-            <version>${omnifaces.version}</version>
-        </dependency-->
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>${primefaces.version}</version>
             <classifier>jakarta</classifier>
         </dependency>
-        <!--dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>all-themes</artifactId>
-            <version>${all-themes.version}</version>
-        </dependency-->
+
     </dependencies>
 
     <build>

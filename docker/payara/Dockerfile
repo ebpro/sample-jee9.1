@@ -1,19 +1,21 @@
 # FROM azul/zulu-openjdk:8u222 as mypayara
 #FROM eclipse-temurin:17-jdk
-FROM eclipse-temurin:11-jdk
+FROM eclipse-temurin:11.0.13_8-jdk-focal
 # Default payara ports to expose
 # 4848: admin console
 # 9009: debug port (JPDA)
 # 8080: http
 # 8181: https
-EXPOSE 4848 9009 8080 8181
+EXPOSE 4848 9009 8080 8181 8686
 
-# Payara version (5.183+)
 #ARG PAYARA_VERSION=5.2021.9
-ARG PAYARA_VERSION=6.2021.1.Alpha1
-ARG PAYARA_PKG=https://search.maven.org/remotecontent?filepath=fish/payara/distributions/payara/${PAYARA_VERSION}/payara-${PAYARA_VERSION}.zip
 #ARG PAYARA_SHA1=81c43f3c537ec74a813b48172758866615e1e792
+
+ARG PAYARA_VERSION=6.2021.1.Alpha1
 ARG PAYARA_SHA1=0262f8af7e52b318109ed43f8a31a1e93f111bbf
+
+ARG PAYARA_PKG=https://search.maven.org/remotecontent?filepath=fish/payara/distributions/payara/${PAYARA_VERSION}/payara-${PAYARA_VERSION}.zip
+
 
 ARG TINI_VERSION=v0.19.0
 

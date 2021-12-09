@@ -8,20 +8,20 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>wsClient</module>
         <module>entites</module>
         <module>utils</module>
         <module>jee</module>
+        <module>websocketClient</module>
     </modules>
 
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <jakarta.jakartaee-api.version>9.1.0</jakarta.jakartaee-api.version>
+        <jakarta.jakartaee-api.version>9.0.0</jakarta.jakartaee-api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <junit-jupiter.version>5.8.1</junit-jupiter.version>
+        <junit-jupiter.version>5.8.2</junit-jupiter.version>
     </properties>
 
     <dependencyManagement>
@@ -41,7 +41,7 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.20</version>
+                <version>1.18.22</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -55,10 +55,16 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
+                <configuration>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
             </plugin>
@@ -78,6 +84,7 @@
                                 <requireMavenVersion>
                                     <version>3.8</version>
                                 </requireMavenVersion>
+                                <dependencyConvergence/>
                             </rules>
                         </configuration>
                     </execution>

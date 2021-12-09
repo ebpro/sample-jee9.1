@@ -41,7 +41,7 @@ public class WsClient {
     public static void main(String[] args) {
         try {
 
-            final WsClient clientEndPoint = new WsClient(new URI("ws://localhost:8080/wsApp-1.0-SNAPSHOT/hellows"));
+            final WsClient clientEndPoint = new WsClient(new URI("ws://localhost:8686/wsApp/hellows"));
             clientEndPoint.sendMessage("Hello 1 !");
             Thread.sleep(5000);
             clientEndPoint.sendMessage("Hello 2 !");

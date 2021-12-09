@@ -21,6 +21,8 @@
         <module>jsf</module>
         <module>restApp</module>
         <module>wsApp</module>
+        <module>ear</module>
+        <module>common-persistence</module>
     </modules>
 
     <dependencies>
@@ -29,14 +31,6 @@
             <artifactId>jakarta.jakartaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>jakarta.enterprise</groupId>
-            <artifactId>jakarta.enterprise.cdi-api</artifactId>
-            <version>3.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
     </dependencies>
 
 </project>

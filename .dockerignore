@@ -1,2 +1,5 @@
 .idea
 README.md
+docker-compose.yml
+.gitignore
+*.log

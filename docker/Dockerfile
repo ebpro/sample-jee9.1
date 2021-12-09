@@ -1,12 +1,13 @@
 # syntax=docker/dockerfile:1.3
 
 ### First we build the application in docker in a controlled env
-FROM maven:3.8.3-eclipse-temurin-11 as build
+FROM maven:3.8.4-eclipse-temurin-11 as build
 WORKDIR /app
-COPY ./ /app/
-RUN --mount=type=cache,id=mvncache,target=/root/.m2/repository,rw \
-	mvn -B clean package
+# COPY pom.xml /app/pom.xml
+COPY . /app/
 
+RUN --mount=type=cache,id=mvncache,target=/root/.m2/repository,rw \
+	mvn -B package
 
 ### Then we add the builded war to a JEE server.
 #FROM payara/server-full:5.2021.9-jdk11 as server
@@ -43,5 +44,7 @@ FROM server as production
 #                  $DEPLOY_DIR
 #COPY --from=build /app/jee/wsApp/target/*.war \
 #                  $DEPLOY_DIR
-COPY --from=build /app/jee/jsf/target/*.war \
+#COPY --from=build /app/jee/jsf/target/*.war \
+#                  $DEPLOY_DIR
+COPY --from=build /app/jee/ear/target/*.ear \
                   $DEPLOY_DIR
