@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jee9.1</artifactId>
+        <groupId>fr.univtln.bruno.samples.jee91</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>wsApp</artifactId>
+    <packaging>war</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>fr.univtln.bruno.samples.jee91</groupId>
+            <artifactId>business</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>ejb</type>
+            <!--type>ejb-client</type-->
+        </dependency>
+
+        <dependency>
+            <groupId>fr.univtln.bruno.samples.jee91</groupId>
+            <artifactId>dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

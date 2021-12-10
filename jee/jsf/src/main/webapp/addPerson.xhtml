@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+<h:body>
+    <div class="card">
+        <h:form>
+            <h3 class="p-mt-0">Add a person</h3>
+            <p:growl id="growl" for="growl-id" showDetail="true" skipDetailIfEqualsSummary="true"/>
+            <h:panelGrid columns="3" cellpadding="7">
+                <p:outputLabel for="fieldName" value="Name"/>
+                <p:inputText id="fieldName" value="#{addPersonView.newPerson.name}"/>
+                <p:message for="fieldName"/>
+                <p:commandButton value="Save" ajax="false" icon="pi pi-check" validateClient="true" styleClass="p-mr-3" action="#{addPersonView.addPerson}"/>
+            </h:panelGrid>
+        </h:form>
+    </div>
+</h:body>
+</html>

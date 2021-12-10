@@ -3,8 +3,6 @@ utils/src/main/resources/*
 *.jks
 *.p12
 target/
-.classpath
-.project
 .settings/
 Thumbs.db
 
