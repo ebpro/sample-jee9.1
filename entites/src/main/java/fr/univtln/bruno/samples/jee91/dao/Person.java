@@ -1,6 +1,9 @@
 package fr.univtln.bruno.samples.jee91.dao;
 
-import jakarta.json.bind.annotation.JsonbTransient;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -28,11 +31,13 @@ import java.util.UUID;
         query = "SELECT p FROM Person p WHERE p.uuid=:uuid")
 @XmlRootElement
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@JsonTypeInfo(include= JsonTypeInfo.As.WRAPPER_OBJECT, use=JsonTypeInfo.Id.NAME)
 public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    @JsonbTransient
+
+    @JsonIgnore
     long id;
 
     @ToString.Include
