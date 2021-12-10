@@ -14,8 +14,9 @@
       http://localhost:8080/restApp/sample/persons
    6. curl http://localhost:8080/restApp-1.0-SNAPSHOT/resources/sample/persons/843c8236-6c6b-450e-9aa3-211a9b897403
    7. curl -H "Accept: text/xml" http://localhost:8080/restApp-1.0-SNAPSHOT/resources/sample/persons
+
 ## Import "real" certificate
 
-  openssl x509 -outform der -in localhost.pem -out localhost.der
+  openssl s_client -showcerts -servername localhost -connect localhost:8181 </dev/null | openssl x509 -outform DER > localhost.der
   keytool -import -noprompt -trustcacerts -storepass storepass -alias localhost -keystore mycert-pub.jks -file localhost.der
 
