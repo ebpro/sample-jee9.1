@@ -18,32 +18,34 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+
         <jakarta.jakartaee-api.version>9.0.0</jakarta.jakartaee-api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
+        <arquillian-weld-embedded.version>3.0.0.Final</arquillian-weld-embedded.version>
+        <weld.version>4.0.2.Final</weld.version>
+
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- JEE -->
             <dependency>
                 <groupId>jakarta.platform</groupId>
                 <artifactId>jakarta.jakartaee-api</artifactId>
                 <version>${jakarta.jakartaee-api.version}</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>${junit-jupiter.version}</version>
-                <scope>test</scope>
-            </dependency>
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.18.22</version>
                 <scope>compile</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
@@ -58,6 +60,58 @@
                     <exclusion>
                         <groupId>jakarta.activation</groupId>
                         <artifactId>jakarta.activation-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- TEST -->
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.7.0.Alpha10</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.arquillian.container</groupId>
+                <artifactId>arquillian-weld-embedded</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <groupId>jakarta.ejb</groupId>
+                        <artifactId>jakarta.ejb-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jakarta.transaction</groupId>
+                        <artifactId>jakarta.transaction-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging-processor</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.jboss.logging</groupId>
+                        <artifactId>jboss-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging-annotations</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.jboss.logging</groupId>
+                        <artifactId>jboss-logging</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
