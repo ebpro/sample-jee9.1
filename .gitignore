@@ -42,3 +42,5 @@ proguard/
 *.ear%
 
 .DS_Store
+/websocketClient/src/main/resources/localhost.der
+/websocketClient/src/main/resources/mycert-pub.jks
