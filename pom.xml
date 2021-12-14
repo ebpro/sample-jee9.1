@@ -16,15 +16,35 @@
 
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-
-        <jakarta.jakartaee-api.version>9.0.0</jakarta.jakartaee-api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <maven.compiler.release>11</maven.compiler.release>
+
+        <!-- The default value is changed to `false` since maven-war-plugin 3.0.0 -->
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+
+        <!-- Cargo maven plugin to deploy apps to Glassfish/Payara servers -->
+        <cargo-maven3-plugin.version>1.9.8</cargo-maven3-plugin.version>
+
+        <!-- Jakarta EE API 9.1.0 with Java 11 -->
+        <jakarta.jakartaee-api.version>9.1.0</jakarta.jakartaee-api.version>
+
+        <h2.version>1.4.200</h2.version>
+
+        <!-- Arquillian 1.7.0 adds Jakarta EE 9 and JUnit 5 support-->
+        <arquillian-bom.version>1.7.0.Alpha10</arquillian-bom.version>
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
-        <arquillian-weld-embedded.version>3.0.0.Final</arquillian-weld-embedded.version>
+        <!-- Tests -->
+        <mockito.version>4.1.0</mockito.version>
+        <hamcrest.version>2.2</hamcrest.version>
+
+        <!-- Payara server -->
+        <payara.version>6.2021.1.Alpha1</payara.version>
+        <arquillian-payara.version>3.0.alpha2</arquillian-payara.version>
+
+        <!-- Weld for embedded CDI -->
+        <arquillian-weld-embedded.version>3.0.2.Final</arquillian-weld-embedded.version>
         <weld.version>4.0.2.Final</weld.version>
 
     </properties>
@@ -73,16 +93,49 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-library</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- Override dependency resolver with latest version.
+         This must go *BEFORE* the Arquillian BOM. -->
+            <!--dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-bom</artifactId>
+                <version>3.1.4</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency-->
+            <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
                 <version>1.7.0.Alpha10</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-
+            <dependency>
+                <groupId>fish.payara.arquillian</groupId>
+                <artifactId>arquillian-payara-server-embedded</artifactId>
+                <version>2.4.5</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>fish.payara.extras</groupId>
+                <artifactId>payara-embedded-all</artifactId>
+                <version>${payara.version}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian.container</groupId>
                 <artifactId>arquillian-weld-embedded</artifactId>
+		<version>weld.version</version>
                 <exclusions>
                     <exclusion>
                         <groupId>jakarta.ejb</groupId>
@@ -97,7 +150,19 @@
 
             <dependency>
                 <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging</artifactId>
+		<version>3.4.2.Final</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
                 <artifactId>jboss-logging-processor</artifactId>
+		<version>3.4.2.Final</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.jboss.logging</groupId>
@@ -133,9 +198,42 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.0.0-M4</version>
+                <executions>
+                    <execution>
+                        <id>default-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/it/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M4</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/it/**</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -151,7 +249,7 @@
                                 <requireMavenVersion>
                                     <version>3.8</version>
                                 </requireMavenVersion>
-                                <dependencyConvergence/>
+                                <!--dependencyConvergence /-->
                             </rules>
                         </configuration>
                     </execution>
@@ -180,4 +278,24 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <repositories>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Sonatype Nexus Staging</name>
+            <url>https://jakarta.oss.sonatype.org/content/repositories/staging/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>payara-nexus</id>
+            <name>Payara Nexus Artifacts</name>
+            <url>https://nexus.payara.fish/repository/payara-artifacts/</url>
+        </repository>
+    </repositories>
+
 </project>

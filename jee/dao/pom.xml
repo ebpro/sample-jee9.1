@@ -12,14 +12,22 @@
 
     <dependencies>
         <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>fr.univtln.bruno.samples.jee91</groupId>
             <artifactId>entites</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+
+
+
+
 
 </project>

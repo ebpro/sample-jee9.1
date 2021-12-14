@@ -24,12 +24,13 @@ class HelloTest {
     @SpokenLanguage(SpokenLanguage.Language.ENGLISH)
     Hello hello2;
 
+    @SuppressWarnings("unused")
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addClass(HelloBean1.class)
                 .addClass(HelloBean2.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+                .addAsManifestResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
     }
 
     @Test

@@ -15,7 +15,7 @@ public class ViewPersonBean {
     @Inject
     PersonDAO personDAO;
 
-    private final String message = "Hello";
+    private final String message = "Hello 1";
 
     public String getMessage() {
         return this.message;
