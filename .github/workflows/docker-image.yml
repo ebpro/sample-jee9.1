@@ -18,7 +18,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image for branch ${GITHUB_REF_NAME}
-      run: DOCKER_BUILDKIT=1 docker build . \
+      run: >
+          DOCKER_BUILDKIT=1 docker build . \
             --build-arg GITHUBLOGIN \
             --build-arg GITHUBPASSWORD \
             --build-arg SONAR_URL \
