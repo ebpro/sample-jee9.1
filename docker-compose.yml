@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    image: brunoe/samplejee91restapp
+    image: brunoe/samplejee91
     environment:
       - ADMIN_PASSWORD=admin
     ports:
