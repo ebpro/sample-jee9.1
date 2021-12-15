@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image for branch ${GITHUB_REF_NAME}
-      run: >
+      run: |
           DOCKER_BUILDKIT=1 docker build . \
             --build-arg GITHUBLOGIN \
             --build-arg GITHUBPASSWORD \
