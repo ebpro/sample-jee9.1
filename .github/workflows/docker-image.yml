@@ -11,7 +11,7 @@ on: [push]
 
 jobs:
 
-  build:
+  maven-build:
 
     runs-on: [self-hosted, linux, X64]
 
