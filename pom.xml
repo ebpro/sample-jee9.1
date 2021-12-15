@@ -173,6 +173,7 @@
             <dependency>
                 <groupId>org.jboss.logging</groupId>
                 <artifactId>jboss-logging-annotations</artifactId>
+                <version>2.2.1.Final</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.jboss.logging</groupId>
@@ -297,5 +298,26 @@
             <url>https://nexus.payara.fish/repository/payara-artifacts/</url>
         </repository>
     </repositories>
+
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <build>
+                <plugins>
+                    <!--Sonarquve -->
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>3.9.1.2184</version>
+                    </plugin>
+                    <plugin>
+                        <groupId>io.github.r0bb3n</groupId>
+                        <artifactId>sonar-quality-gate-maven-plugin</artifactId>
+                        <version>1.1.0</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

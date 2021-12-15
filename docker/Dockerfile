@@ -1,5 +1,10 @@
 ### First we build the application in docker in a controlled env
 FROM maven:3.8.4-eclipse-temurin-11 as build
+ARG GITHUBLOGIN
+ARG GITHUBPASSWORD
+ARG SONAR_HOST
+ARG SONAR_TOKEN
+
 WORKDIR /app
 
 #see https://www.jrebel.com/blog/how-to-speed-up-your-maven-build

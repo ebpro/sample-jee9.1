@@ -28,7 +28,7 @@
         <profile>
             <id>sonar</id>
             <properties>
-                <sonar.host.url>${env.SONAR_HOST}</sonar.host.url>
+                <sonar.host.url>${env.SONAR_URL}</sonar.host.url>
                 <sonar.login>${env.SONAR_TOKEN}</sonar.login>
             </properties>
         </profile>
