@@ -135,7 +135,7 @@
             <dependency>
                 <groupId>org.jboss.arquillian.container</groupId>
                 <artifactId>arquillian-weld-embedded</artifactId>
-		<version>weld.version</version>
+                <version>${weld.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>jakarta.ejb</groupId>
@@ -151,7 +151,7 @@
             <dependency>
                 <groupId>org.jboss.logging</groupId>
                 <artifactId>jboss-logging</artifactId>
-		<version>3.4.2.Final</version>
+                <version>3.4.2.Final</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>log4j</artifactId>
@@ -162,7 +162,7 @@
             <dependency>
                 <groupId>org.jboss.logging</groupId>
                 <artifactId>jboss-logging-processor</artifactId>
-		<version>3.4.2.Final</version>
+                <version>3.4.2.Final</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.jboss.logging</groupId>
