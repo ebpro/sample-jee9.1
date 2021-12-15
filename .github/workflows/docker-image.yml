@@ -17,11 +17,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image for branch ${GITHUB_REF##*/}
+    - name: Build the Docker image for branch ${GITHUB_REF_NAME}
       run: DOCKER_BUILDKIT=1 docker build . \
             --build-arg GITHUBLOGIN \
             --build-arg GITHUBPASSWORD \
             --build-arg SONAR_URL \
             --build-arg SONAR_TOKEN \
             --file ./docker/Dockerfile \
-            --tag brunoe/samplejee91:${GITHUB_REF##*/}
+            --tag brunoe/samplejee91:${GITHUB_REF_NAME}
