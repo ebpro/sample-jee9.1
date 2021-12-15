@@ -18,14 +18,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image for branch ${GITHUB_REF##*/}
-      run: DOCKER_BUILDKIT=1 docker build . --file ./docker/Dockerfile --tag brunoe/samplejee91::${GITHUB_REF##*/}
-
-
-  maven-sonar:
-    runs-on: [ self-hosted, Linux ]
-    needs: maven-build
-    # Develop branch only
-    # if: github.ref == 'refs/heads/develop'
-    steps:
-      - name: Launch a sonar analysis
-        run: ./mvn.sh -D sonar.branch.name=${GITHUB_REF#refs/heads/} --activate-profiles sonar sonar:sonar && mvn --activate-profiles sonar -pl . sonar-quality-gate:check
+      run: DOCKER_BUILDKIT=1 docker build . \
+            --env GITHUBLOGIN="$GITHUBLOGIN" \
+            --env GITHUBPASSWORD="$GITHUBPASSWORD" \
+            --env SONAR_HOST="$SONAR_HOST" \
+            --env SONAR_TOKEN="$SONAR_TOKEN" \
+            --file ./docker/Dockerfile \
+            --tag brunoe/samplejee91:${GITHUB_REF##*/}

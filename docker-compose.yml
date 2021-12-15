@@ -2,6 +2,11 @@ version: '3'
 services:
   jakartaEE:
     build:
+      args:
+        - GITHUBLOGIN
+        - GITHUBPASSWORD
+        - SONAR_HOST
+        - SONAR_TOKEN
       context: .
       dockerfile: docker/Dockerfile
     image: brunoe/samplejee91
