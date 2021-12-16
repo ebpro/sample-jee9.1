@@ -2,9 +2,16 @@ version: '3'
 services:
   jakartaEE:
     build:
+      args:
+        - BRANCH
+        - TAG
+        - GITHUBLOGIN
+        - GITHUBPASSWORD
+        - SONAR_URL
+        - SONAR_TOKEN
       context: .
       dockerfile: docker/Dockerfile
-    image: brunoe/samplejee91
+    image: brunoe/samplejee91:${TAG:-latest}
     environment:
       - ADMIN_PASSWORD=admin
     ports:
