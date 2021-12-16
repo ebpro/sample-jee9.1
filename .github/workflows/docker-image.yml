@@ -7,7 +7,15 @@ name: Docker Image CI
 #    branches: [ develop ]
     
 # on every push
-on: [push]    
+on: [push]
+
+env:
+  GITHUBLOGIN: ${{secrets.GITHUBLOGIN}}
+  GITHUBPASSWORD: ${{secrets.GITHUBPASSWORD}}
+  DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+  SONAR_URL: ${{secrets.SONAR_URL}}
+  SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
 
 jobs:
 
@@ -17,5 +25,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Get Tag from Maven version
+      run: echo "TAG=$(docker run -v maven-repo:/root/.m2 -w /usr/src/mymaven -v ${PWD}:/usr/src/mymaven --rm maven:3.8.4-eclipse-temurin-11 mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec|sed s/-SNAPSHOT/.${GITHUB_RUN_NUMBER}/)" >> $GITHUB_ENV
+    - name: test
+      run: echo $TAG
     - name: Build the Docker image for branch ${GITHUB_REF_NAME}
-      run: DOCKER_BUILDKIT=1 docker build . --build-arg GITHUBLOGIN --build-arg GITHUBPASSWORD --build-arg SONAR_URL --build-arg SONAR_TOKEN --file ./docker/Dockerfile --tag brunoe/samplejee91:${GITHUB_REF_NAME}
+      # run: DOCKER_BUILDKIT=1 docker build . --build-arg GITHUBLOGIN --build-arg GITHUBPASSWORD --build-arg SONAR_URL --build-arg SONAR_TOKEN --file ./docker/Dockerfile --tag brunoe/samplejee91:${GITHUB_REF_NAME}
+      run: COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 BRANCH=${GITHUB_REF_NAME} TAG=${TAG} docker-compose build jakartaEE
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+

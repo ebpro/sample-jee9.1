@@ -1,8 +1,9 @@
 ### First we build the application in docker in a controlled env
 FROM maven:3.8.4-eclipse-temurin-11 as build
+ARG BRANCH
 ARG GITHUBLOGIN
 ARG GITHUBPASSWORD
-ARG SONAR_HOST
+ARG SONAR_URL
 ARG SONAR_TOKEN
 
 WORKDIR /app
@@ -19,11 +20,11 @@ COPY docker/settings-docker.xml /usr/share/maven/ref/
 COPY . /app/
 
 RUN --mount=type=cache,id=mvncache,target=/root/.m2/repository,rw \
-	mvn $MAVEN_CLI_OPTS -Dmaven.test.skip=true verify
+	mvn $MAVEN_CLI_OPTS verify
 
 RUN --mount=type=cache,id=mvncache,target=/root/.m2/repository,rw \
     if [ "$SONAR_TOKEN" ] ; then \
-      mvn $MAVEN_CLI_OPTS -D sonar.branch.name=${GITHUB_REF#refs/heads/} \
+      mvn $MAVEN_CLI_OPTS -D sonar.branch.name=${BRANCH} \
         --activate-profiles sonar sonar:sonar && \
       mvn $MAVEN_CLI_OPTS --activate-profiles sonar -pl . sonar-quality-gate:check ; \
     fi
