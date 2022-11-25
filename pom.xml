@@ -3,7 +3,7 @@
 
     <groupId>fr.univtln.bruno.samples.jee91</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0-myfeature-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Demo JakartaEE</name>
